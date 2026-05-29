@@ -16,6 +16,7 @@ public class GojoMod {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.ITEMS.register(bus);
         ModEntities.ENTITIES.register(bus);
+        // ClientSetup is picked up automatically via @Mod.EventBusSubscriber(Dist.CLIENT)
         MinecraftForge.EVENT_BUS.register(this);
     }
 }
