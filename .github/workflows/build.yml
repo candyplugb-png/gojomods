@@ -1,0 +1,43 @@
+name: Build Gojo Mod
+
+on:
+  push:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install Gradle 8.1.1
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-8.1.1-bin.zip -O gradle.zip
+          unzip -q gradle.zip -d /opt/gradle
+          echo "/opt/gradle/gradle-8.1.1/bin" >> $GITHUB_PATH
+
+      - name: Generate Gradle wrapper
+        run: |
+          gradle wrapper --gradle-version 8.1.1 --distribution-type bin
+          chmod +x gradlew
+
+      - name: Build mod
+        run: ./gradlew build --no-daemon --stacktrace
+
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gojo-satoru-mod
+          path: build/libs/*[^sources].jar
+          if-no-files-found: error
