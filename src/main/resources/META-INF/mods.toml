@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[dependencies.gojomods]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.gojomods]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+
+[[mods]]
+modId="gojomods"
+version="1.0.0"
+displayName="Gojo Satoru Mod"
+description='''
+Техника Годзё Сатору — Полая Пустота.
+Надень повязку → возьми Пустой шар → удерживай ЛКМ 10 секунд.
+Синий + Красный = Полая Пустота!
+'''
